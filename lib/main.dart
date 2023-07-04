@@ -19,3 +19,7 @@ class MainApp extends StatelessWidget {
     );
   }
 }
+
+
+//el comando git checkout -- . 
+//recupera el proyecto al commit anterior en la rama en la que nos encontramos
