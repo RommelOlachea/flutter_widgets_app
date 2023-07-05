@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:widgets_app/config/menu/menu_items.dart';
 import 'package:widgets_app/config/theme/app_theme.dart';
 import 'package:widgets_app/presentation/home_screen.dart';
 
@@ -19,6 +20,3 @@ class MainApp extends StatelessWidget {
   }
 }
 
-
-//el comando git checkout -- . 
-//recupera el proyecto al commit anterior en la rama en la que nos encontramos
