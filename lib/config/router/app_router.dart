@@ -8,19 +8,24 @@ import '../../presentation/screens/screens.dart';
 final appRouter = GoRouter(
   initialLocation: '/',
   routes: [    
-    GoRoute(      
+    GoRoute(
+      name: HomeScreen.name,      
       path: '/',
       builder: (context, state) => HomeScreen(),
     ),
     GoRoute(      
+      name: ButtonsScreen.name,
       path: '/buttons',
       builder: (context, state) => ButtonsScreen(),
     ),
     GoRoute(      
+      name: CardsScreen.name,
       path: '/cards',
       builder: (context, state) => CardsScreen(),
     ),
   ],
 );
 
-//GoRoute
+//GoRoute, el parametro name, solamente sirve para identicar el path, teoricamente,
+//si ya tenemos el path, no ocupamos el name, pero como dice fernando, queda a nuestrea
+//discrecion
