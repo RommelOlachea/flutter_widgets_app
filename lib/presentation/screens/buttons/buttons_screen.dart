@@ -25,6 +25,7 @@ class ButtonsScreen extends StatelessWidget {
 class _ButtonsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return SizedBox(
       width: double.infinity,
       child: Padding(
@@ -56,13 +57,26 @@ class _ButtonsView extends StatelessWidget {
                 TextButton(onPressed: (){}, child: const Text('TextButton')),
                 TextButton.icon(
                   onPressed: (){}, 
-                  label: const Text('TextButton Icon'),
+                  label: const Text('Text Icon'),
                   icon: const Icon(Icons.account_box_outlined),
                   ),
 
-              //todo: custom button
+                //todo: custom button
 
-              
+                IconButton(onPressed: () {
+                  
+                }, 
+                icon: const Icon(Icons.app_registration_rounded) 
+                ) ,
+
+                IconButton(onPressed: () {
+                  
+                }, icon: Icon(Icons.app_registration_rounded),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(colors.primary),
+                  iconColor: const MaterialStatePropertyAll(Colors.white),
+                ),
+                ),
 
     
     
