@@ -16,5 +16,17 @@ Proyecto con flutter creado a partir del curso de devtalles, que nos permite cre
     -   Configuraciones de router
         -   Propio 
         -   De terceros 
-
+- RefreshIndicator
+- InfiniteScroll
+- ProgressIndicator
+    - Lineales
+    - Circulares
+    - Controlados
+- Animaciones
+- SnackBars
+- Dialogos
+- Licencias
+- Switches, Checkboxes, Radios
+- Tiles
+- Listas
 
