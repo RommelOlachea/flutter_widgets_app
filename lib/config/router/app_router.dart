@@ -28,6 +28,11 @@ final appRouter = GoRouter(
       path: '/progress',
       builder: (context, state) => ProgressScreen(),
     ),
+    GoRoute(      
+      name: SnackbarScreen.name,
+      path: '/snackbars',
+      builder: (context, state) => SnackbarScreen(),
+    ),
   ],
 );
 
