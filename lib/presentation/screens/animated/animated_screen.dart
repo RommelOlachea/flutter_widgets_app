@@ -12,12 +12,14 @@ class AnimatedScreen extends StatelessWidget {
       ),
 
       body: Center(
-        child: Container(
-          width: 100,
-          height: 100,
+        child: AnimatedContainer(
+          curve: Curves.easeOutCubic,
+          duration: const Duration(milliseconds: 400),
+          width: 300,
+          height: 200,
           decoration: BoxDecoration(
             color: Colors.blue,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(30),
           ),
         ),
       ),
