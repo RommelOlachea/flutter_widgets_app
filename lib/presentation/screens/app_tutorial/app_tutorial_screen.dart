@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -24,10 +25,39 @@ final slides = <SlideInfo>[
       'assets/images/3.png'),
 ];
 
-class AppTutorialScreen extends StatelessWidget {
+class AppTutorialScreen extends StatefulWidget {
   static const name = 'tutorial_screen';
 
   const AppTutorialScreen({super.key});
+
+  @override
+  State<AppTutorialScreen> createState() => _AppTutorialScreenState();
+}
+
+class _AppTutorialScreenState extends State<AppTutorialScreen> {
+  final PageController pageViewController = PageController();
+  bool endReach = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    pageViewController.addListener(() {
+      print('${pageViewController.page}');
+
+      final page = pageViewController.page ?? 0;
+      if (!endReach && page >= (slides.length - 1)) {
+        setState(() {
+          endReach = true;
+        });
+      }
+    });
+
+    @override
+    void dispose() {
+      pageViewController.dispose(); //cuando hacemos el dispose del control, debemos realizar el dispose de los listener
+      super.dispose();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +66,8 @@ class AppTutorialScreen extends StatelessWidget {
       body: Stack(
         children: [
           PageView(
-            physics: BouncingScrollPhysics(),
+            controller: pageViewController,
+            physics: const BouncingScrollPhysics(),
             children: slides
                 .map((slideData) => _Slide(
                     title: slideData.title,
@@ -48,7 +79,20 @@ class AppTutorialScreen extends StatelessWidget {
               right: 20,
               top: 50,
               child: TextButton(
-                  onPressed: () => context.pop(), child: const Text('Salir')))
+                  onPressed: () => context.pop(), child: const Text('Salir'))),
+          endReach
+              ? Positioned(
+                  bottom: 30,
+                  right: 30,
+                  child: FadeInRight(
+                    from: 15, //indica que se movera solamente 15 unidades
+                    delay: const Duration(seconds: 1),
+                    child: FilledButton(
+                        onPressed: () => context.pop(),
+                        child: const Text('Comenzar')),
+                  ),
+                )
+              : const SizedBox(),
         ],
       ),
     );
@@ -79,14 +123,14 @@ class _Slide extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image(image: AssetImage(imageurl)),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
               title,
               style: titleStyle,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
