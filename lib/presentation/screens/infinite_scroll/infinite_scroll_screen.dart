@@ -58,6 +58,22 @@ class _InfiniteScrollScreenState extends State<InfiniteScrollScreen> {
     //todo: mover scroll
   }
 
+  Future<void> onRefresh() async {
+    isLoading = true;
+    setState(() {});
+
+    await Future.delayed(const Duration(seconds: 3));
+    if (!isMounted) return;
+
+    isLoading = false;
+    final lastId = imagesIds.last;
+    imagesIds.clear();
+    imagesIds.add(lastId + 1);
+    addFiveImages();
+
+    setState(() {});
+  }
+
   void addFiveImages() {
     final lastId = imagesIds.last;
 
@@ -78,24 +94,32 @@ class _InfiniteScrollScreenState extends State<InfiniteScrollScreen> {
         context: context,
         removeTop: true,
         removeBottom: true,
-        child: ListView.builder(
-            controller: scrollController,
-            itemCount: imagesIds.length,
-            itemBuilder: (context, index) {
-              return FadeInImage(
-                width: double.infinity,
-                fit: BoxFit.cover,
-                placeholder: const AssetImage('assets/images/jar-loading.gif'),
-                image: NetworkImage(
-                    'https://picsum.photos/id/${imagesIds[index]}/500/300'),
-              );
-            }),
+        child: RefreshIndicator(
+          onRefresh: onRefresh,
+          edgeOffset: 10, //esto para separarlo de la isla dinamica
+          strokeWidth: 2, //para hacer delgado el circular progress
+          child: ListView.builder(
+              controller: scrollController,
+              itemCount: imagesIds.length,
+              itemBuilder: (context, index) {
+                return FadeInImage(
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  placeholder:
+                      const AssetImage('assets/images/jar-loading.gif'),
+                  image: NetworkImage(
+                      'https://picsum.photos/id/${imagesIds[index]}/500/300'),
+                );
+              }),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.pop(),
         // child: const Icon(Icons.arrow_back_ios_new_sharp),
         child: (!isLoading)
-            ? FadeIn(child: const Icon(Icons.arrow_back_ios_new_sharp)) //con el fade in, no aparace de golpe el boton cuando se termina de cargar
+            ? FadeIn(
+                child: const Icon(Icons
+                    .arrow_back_ios_new_sharp)) //con el fade in, no aparace de golpe el boton cuando se termina de cargar
             : SpinPerfect(
                 infinite: true, child: const Icon(Icons.refresh_rounded)),
       ),
