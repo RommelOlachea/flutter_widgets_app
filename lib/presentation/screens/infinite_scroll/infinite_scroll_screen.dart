@@ -47,7 +47,7 @@ class _InfiniteScrollScreenState extends State<InfiniteScrollScreen> {
 
     addFiveImages();
     isLoading = false;
-    //todo: revisar si esta montado el componente / widget
+    
 
     if (!isMounted)
       return; //si no esta montado no lo refrescamos, lo hacemos asi, porque estamos en una funcion asincrona
@@ -55,7 +55,7 @@ class _InfiniteScrollScreenState extends State<InfiniteScrollScreen> {
     //porque esta destruido
     setState(() {});
 
-    //todo: mover scroll
+    moveScrollToBottom();
   }
 
   Future<void> onRefresh() async {
@@ -72,6 +72,16 @@ class _InfiniteScrollScreenState extends State<InfiniteScrollScreen> {
     addFiveImages();
 
     setState(() {});
+    
+  }
+
+  void moveScrollToBottom() {
+    if (scrollController.position.pixels + 150 <=
+        scrollController.position.maxScrollExtent) return;
+
+    scrollController.animateTo(scrollController.position.pixels + 120,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.fastOutSlowIn);
   }
 
   void addFiveImages() {
