@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:widgets_app/config/menu/menu_items.dart';
+import 'package:widgets_app/presentation/widgets/side_menu.dart';
 
 class HomeScreen extends StatelessWidget {
   static const name = 'home_screen';
@@ -14,9 +15,13 @@ class HomeScreen extends StatelessWidget {
         title: const Text('Flutter + Material 3'),
       ),
       body: _HomeView(),
+      drawer: const SideMenu(),
     );
   }
 }
+
+//drawer es para el menu lateral de izquierda a derecha, y el enddrawer para derecha 
+//a izquierda
 
 class _HomeView extends StatelessWidget {
   @override
