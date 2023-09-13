@@ -41,7 +41,7 @@ class _SideMenuState extends State<SideMenu> {
             child: Divider(),
             ),
 
-          Padding(
+          const Padding(
               padding: EdgeInsets.fromLTRB(28, 10, 16, 10),
               child: Text('More options')),
         
