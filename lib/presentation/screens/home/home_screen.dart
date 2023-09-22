@@ -10,17 +10,20 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final scaffoldKey = GlobalKey<ScaffoldState>();
+
     return Scaffold(
+      key: scaffoldKey, //el key hace referencia al estado actual del scaffold, es decir, si tiene drawer, menu lateral etc 
       appBar: AppBar(
         title: const Text('Flutter + Material 3'),
       ),
       body: _HomeView(),
-      drawer: const SideMenu(),
+      drawer: SideMenu(scaffoldKey: scaffoldKey,),
     );
   }
 }
 
-//drawer es para el menu lateral de izquierda a derecha, y el enddrawer para derecha 
+//drawer es para el menu lateral de izquierda a derecha, y el enddrawer para derecha
 //a izquierda
 
 class _HomeView extends StatelessWidget {
@@ -70,8 +73,6 @@ class _CustomListTile extends StatelessWidget {
 
         context.push(menuItem.link); //esto ya es con go_router
         // context.pushNamed(CardsScreen.name); //esto es con go router
-
-
       },
     );
   }
